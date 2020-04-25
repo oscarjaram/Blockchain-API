@@ -2,8 +2,6 @@
 from hashlib import sha256
 import json
 import time
-from flask import Flask, request
-import requests
 
 class Block:
 
@@ -85,13 +83,3 @@ class Blockchain:
         self.add_block(new_block, proof)
         self.unconfirmed_transactions = []
         return new_block.index
-
-blockchain = Blockchain()
-blockchain.new_transaction('jskajskajska')
-blockchain.new_transaction('jskajskajskaj')
-blockchain.mine()
-n_bc = len(blockchain.chain) - 1
-print(blockchain.print_block(n_bc))
-
-
-# %%
