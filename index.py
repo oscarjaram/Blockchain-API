@@ -39,3 +39,5 @@ def mine_unconfirmed_transactions():
 @app.route('/pending_transaction', methods=['POST'])
 def get_pending_transaction():
     return json.dumps(blockchain.nconfirmed_transactions)
+
+app.run(port=8000)
