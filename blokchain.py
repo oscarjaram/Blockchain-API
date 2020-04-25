@@ -67,6 +67,18 @@ class Blockchain:
         condition2 = block_hash == block.compute_hash()
         return (condition1 and condition2)
 
+    def check_chain_validity(self, chain):
+        result = True
+        previous_hash = '0'
+        for block in chain:
+            block_hash = block.hash
+            delattr(block, 'hash')
+            if (not self.is_valid_proof(block, block.hash)) or (previous_hash != block.previous_hash):
+                result = False
+                break
+            block.hash, previous_hash = block_hash, block_hash
+        return result
+
     def new_transaction(self, transaction):
         self.unconfirmed_transactions.append(transaction)
 
